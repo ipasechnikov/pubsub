@@ -1,4 +1,13 @@
-# PubSub .Net [![Build status](https://ci.appveyor.com/api/projects/status/q228h98xg9905ghc)](https://ci.appveyor.com/project/upta/pubsub)
+# **⚠️ Attention**
+
+This is a fork of [this repo](https://github.com/upta/pubsub).
+This fork was created for personal usage and targets .NET Framework 3.5.
+Maybe someone will find it useful (probably not) for old .NET Framework 3.5 projects.
+---
+
+---
+
+# PubSub .Net
 
 An extremely light-weight, easy to use .Net pub/sub library 
 
@@ -77,24 +86,5 @@ To keep things simple, yet flexible, PubSub PCL is implemented using core ideas:
 	- This avoids the need to have a list of string constants (or just magic strings), enums, whatever to define what you want to listen for/send.
 	- This gives us nice strongly-typed data that can be passed from our Publish methods to our Subscribe handlers (i.e. Product above)
 
-### Get it on Nuget
-
-	Install-Package PubSub
-
-![nuget dialog image for PubSub PCL](http://i.imgur.com/jH6ONPg.png "Nuget dialog for PubSub PCL")
-
 ### Target Frameworks
-* .Net Standard 1.1 / 2.0
-
-### Currently supported platforms
-* .Net Framwork 4.5 / 4.5.1
-* Windows 8 / 8.1
-* Windows Phone Silverlight 8 / 8.1
-* Windows Phone 8.1 (WinRT)
-* Silverlight 5
-* Xamarin.Android
-* Xamarin.iOS
-
-### Questions? Thoughts?
-Feel free to post stuff to the [issues](https://github.com/upta/pubsub/issues) page or hit me up on Twitter [@brianupta](https://twitter.com/brianupta)
-
+* .NET Framework 3.5

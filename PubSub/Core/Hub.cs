@@ -8,42 +8,60 @@ namespace PubSub
 {
     public class Hub
     {
-        internal List<Handler> _handlers = new List<Handler>();
+        public List<Handler> _handlers = new List<Handler>();
         internal object _locker = new object();
         private static Hub _default;
 
-        public static Hub Default => _default ?? (_default = new Hub());
-        
+        public static Hub Default
+        {
+            get
+            {
+                return _default ?? (_default = new Hub());
+            }
+        }
+
         public void Publish<T>(T data = default(T))
         {
             foreach (var handler in GetAliveHandlers<T>())
             {
-                switch (handler.Action)
+                var action = handler.Action as Action<T>;
+                if (action != null)
                 {
-                    case Action<T> action:
-                        action(data);
-                        break;
-                    case Func<T, Task> func:
-                        func(data);
-                        break;
+                    action(data);
+                    continue;
+                }
+
+                var func = handler.Action as Func<T, Task>;
+                if (func != null)
+                {
+                    func(data);
+                    continue;
                 }
             }
         }
 
-        public async Task PublishAsync<T>(T data = default(T))
+        public Task PublishAsync<T>(T data = default(T))
         {
+            var taskList = new List<Task>();
+
             foreach (var handler in GetAliveHandlers<T>())
             {
-                switch (handler.Action)
+                var action = handler.Action as Action<T>;
+                if (action != null)
                 {
-                    case Action<T> action:
-                        action(data);
-                        break;
-                    case Func<T, Task> func:
-                        await func(data);
-                        break;
+                    taskList.Add(Task.Run(() => action(data)));
+                    continue;
+                }
+
+                var func = handler.Action as Func<T, Task>;
+                if (func != null)
+                {
+                    taskList.Add(func(data));
+                    continue;
                 }
             }
+
+            return Task.Run(() => Task.WaitAll(taskList.ToArray()));
         }
 
         /// <summary>
@@ -191,7 +209,7 @@ namespace PubSub
         private List<Handler> GetAliveHandlers<T>()
         {
             PruneHandlers();
-            return _handlers.Where(h => h.Type.GetTypeInfo().IsAssignableFrom(typeof(T).GetTypeInfo())).ToList();
+            return _handlers.Where(h => h.Type.GetType().IsAssignableFrom(typeof(T).GetType())).ToList();
         }
 
         private void PruneHandlers()
@@ -206,7 +224,7 @@ namespace PubSub
             }
         }
 
-        internal class Handler
+        public class Handler
         {
             public Delegate Action { get; set; }
             public WeakReference Sender { get; set; }

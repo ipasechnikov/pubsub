@@ -9,6 +9,9 @@
             this.hub = hub;
         }
 
-        public void Publish<T>(T data) => hub.Publish(data);
+        public void Publish<T>(T data)
+        {
+            hub.Publish(data);
+        }
     }
 }
