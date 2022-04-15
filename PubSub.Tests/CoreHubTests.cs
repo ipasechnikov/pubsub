@@ -1,10 +1,10 @@
-﻿using System;
+﻿using NUnit.Framework;
+using System;
 using System.Linq;
-using Microsoft.VisualStudio.TestTools.UnitTesting;
 
 namespace PubSub.Tests
 {
-    [TestClass]
+    [TestFixture]
     public class CoreHubTests
     {
         private Hub _hub;
@@ -12,7 +12,7 @@ namespace PubSub.Tests
         private object _condemnedSubscriber;
         private object _preservedSubscriber;
 
-        [TestInitialize]
+        [SetUp]
         public void Setup()
         {
             _hub = new Hub();
@@ -20,8 +20,8 @@ namespace PubSub.Tests
             _condemnedSubscriber = new object();
             _preservedSubscriber = new object();
         }
-        
-        [TestMethod]
+
+        [Test]
         public void Publish_CallsAllRegisteredActions()
         {
             // arrange
@@ -36,7 +36,7 @@ namespace PubSub.Tests
             Assert.AreEqual(2, callCount);
         }
 
-        [TestMethod]
+        [Test]
         public void Publish_SpecialEvent_CaughtByBase()
         {
             // arrange
@@ -51,7 +51,7 @@ namespace PubSub.Tests
             Assert.AreEqual(2, callCount);
         }
 
-        [TestMethod]
+        [Test]
         public void Publish_BaseEvent_NotCaughtBySpecial()
         {
             // arrange
@@ -67,7 +67,7 @@ namespace PubSub.Tests
         }
 
 
-        [TestMethod]
+        [Test]
         public void Publish_CleansUpBeforeSending()
         {
             // arrange
@@ -87,7 +87,7 @@ namespace PubSub.Tests
             GC.KeepAlive(liveSubscriber);
         }
 
-        [TestMethod]
+        [Test]
         public void Subscribe_AddsHandlerToList()
         {
             // arrange
@@ -103,7 +103,7 @@ namespace PubSub.Tests
             Assert.AreEqual(action.Method.GetParameters().First().ParameterType, h.Type);
         }
 
-        [TestMethod]
+        [Test]
         public void Unsubscribe_RemovesAllHandlers_OfAnyType_ForSender()
         {
             // act
@@ -116,7 +116,7 @@ namespace PubSub.Tests
             Assert.IsFalse(_hub._handlers.Any(a => a.Sender.Target == _subscriber));
         }
 
-        [TestMethod]
+        [Test]
         public void Unsubscribe_RemovesAllHandlers_OfSpecificType_ForSender()
         {
             // arrange
@@ -131,7 +131,7 @@ namespace PubSub.Tests
             Assert.IsFalse(_hub._handlers.Any(a => a.Sender.Target == _subscriber));
         }
 
-        [TestMethod]
+        [Test]
         public void Unsubscribe_RemovesSpecificHandler_ForSender()
         {
             var actionToDie = new Action<string>(a => { });
@@ -146,7 +146,7 @@ namespace PubSub.Tests
             Assert.IsFalse(_hub._handlers.Any(a => a.Action.Equals(actionToDie)));
         }
 
-        [TestMethod]
+        [Test]
         public void Exists_EventDoesExist()
         {
             var action = new Action<string>(a => { });
@@ -157,7 +157,7 @@ namespace PubSub.Tests
         }
 
 
-        [TestMethod]
+        [Test]
         public void Unsubscribe_CleanUps()
         {
             // arrange
@@ -177,7 +177,7 @@ namespace PubSub.Tests
             Assert.AreEqual(0, _hub._handlers.Count);
         }
 
-        [TestMethod]
+        [Test]
         public void PubSubUnsubDirectlyToHub()
         {
             // arrange
@@ -227,7 +227,7 @@ namespace PubSub.Tests
             Assert.AreEqual(10, callCount);
         }
 
-        [TestMethod]
+        [Test]
         public void Publish_NoExceptionRaisedWhenHandlerCreatesNewSubscriber()
         {
             // arrange

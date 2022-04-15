@@ -1,12 +1,12 @@
-﻿using System;
-using Microsoft.VisualStudio.TestTools.UnitTesting;
+﻿using NUnit.Framework;
+using System;
 
 namespace PubSub.Tests
 {
-    [TestClass]
+    [TestFixture]
     public class ExtensionTests
     {
-        [TestMethod]
+        [Test]
         public void Exists_Static()
         {
             var hub = new Hub();
@@ -22,7 +22,7 @@ namespace PubSub.Tests
             hub.Unsubscribe(action);
         }
 
-        [TestMethod]
+        [Test]
         public void NotExists_Static()
         {
             var hub = new Hub();
@@ -38,7 +38,7 @@ namespace PubSub.Tests
             hub.Unsubscribe(action);
         }
 
-        [TestMethod]
+        [Test]
         public void PublishExtensions()
         {
             var hub = new Hub();
@@ -56,7 +56,7 @@ namespace PubSub.Tests
             Assert.AreEqual(6, callCount);
         }
 
-        [TestMethod]
+        [Test]
         public void UnsubscribeExtensions()
         {
             var hub = new Hub();

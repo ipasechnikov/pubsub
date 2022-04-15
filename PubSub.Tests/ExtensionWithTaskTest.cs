@@ -1,14 +1,14 @@
-﻿using System;
+﻿using NUnit.Framework;
+using System;
 using System.Threading;
 using System.Threading.Tasks;
-using Microsoft.VisualStudio.TestTools.UnitTesting;
 
 namespace PubSub.Tests
 {
-    [TestClass]
+    [TestFixture]
     public class ExtensionWithTaskTest
     {
-        [TestMethod]
+        [Test]
         public void Subscribe_With_Action_And_Func_Publish_All()
         {
             var hub = new Hub();
@@ -33,7 +33,7 @@ namespace PubSub.Tests
             Assert.AreEqual(3, callCount);
         }
 
-        [TestMethod]
+        [Test]
         public void Subscribe_With_Action_And_Func_Publish_One_As_Async()
         {
             var hub = new Hub();
@@ -58,7 +58,7 @@ namespace PubSub.Tests
             Assert.AreEqual(4, callCount);
         }
 
-        [TestMethod]
+        [Test]
         public void Subscribe_With_Action_And_Func_Publish_All_As_Async()
         {
             var hub = new Hub();
@@ -94,7 +94,7 @@ namespace PubSub.Tests
             hub.PublishAsync<Event>().Wait();
 
             // assert 2
-            Assert.AreEqual(6, callCount);            
+            Assert.AreEqual(6, callCount);
 
         }
     }

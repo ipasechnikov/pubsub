@@ -4,7 +4,7 @@
     {
         private readonly Hub hub;
 
-        public Publisher( Hub hub )
+        public Publisher(Hub hub)
         {
             this.hub = hub;
         }
