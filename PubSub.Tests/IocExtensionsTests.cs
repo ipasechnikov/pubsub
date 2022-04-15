@@ -1,9 +1,9 @@
-﻿using System;
-using Microsoft.VisualStudio.TestTools.UnitTesting;
+﻿using NUnit.Framework;
+using System;
 
 namespace PubSub.Tests
 {
-    [TestClass]
+    [TestFixture]
     public class IocExtensionsTests
     {
         private IPubSubPipelineFactory pubSubFactory;
@@ -12,7 +12,7 @@ namespace PubSub.Tests
         private object sender;
         private object preservedSender;
 
-        [TestInitialize]
+        [SetUp]
         public void Setup()
         {
             pubSubFactory = new PubSubPipelineFactory();
@@ -21,8 +21,8 @@ namespace PubSub.Tests
             sender = new object();
             preservedSender = new object();
         }
-        
-        [TestMethod]
+
+        [Test]
         public void Publish_Over_Interface_Calls_All_Subscribers()
         {
             var callCount = 0;
@@ -33,8 +33,8 @@ namespace PubSub.Tests
 
             Assert.AreEqual(2, callCount);
         }
-        
-        [TestMethod]
+
+        [Test]
         public void Unsubscribe_OverInterface_RemovesAllHandlers_OfAnyType_ForSender()
         {
             subscriber.Subscribe(preservedSender, new Action<Event>(a => { }));
@@ -45,7 +45,7 @@ namespace PubSub.Tests
             Assert.IsTrue(subscriber.Exists<Event>(preservedSender));
         }
 
-        [TestMethod]
+        [Test]
         public void Unsubscribe_OverInterface_RemovesAllHandlers_OfSpecificType_ForSender()
         {
             subscriber.Subscribe(sender, new Action<string>(a => { }));
@@ -57,7 +57,7 @@ namespace PubSub.Tests
             Assert.IsFalse(subscriber.Exists<string>(sender));
         }
 
-        [TestMethod]
+        [Test]
         public void Unsubscribe_RemovesSpecificHandler_ForSender()
         {
             var actionToDie = new Action<string>(a => { });

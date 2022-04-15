@@ -6,7 +6,7 @@ namespace PubSub
     {
         private readonly Hub hub;
 
-        public Subscriber( Hub hub )
+        public Subscriber(Hub hub)
         {
             this.hub = hub;
         }
