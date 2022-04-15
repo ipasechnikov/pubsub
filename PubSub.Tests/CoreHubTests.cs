@@ -242,7 +242,9 @@ namespace PubSub.Tests
             // assert
             catch (InvalidOperationException e)
             {
-                Assert.Fail($"Expected no exception, but got: {e}");
+                Assert.Fail(
+                    String.Format("Expected no exception, but got: {0}", e)
+                );
             }
         }
 

@@ -1,11 +1,11 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio 14
-VisualStudioVersion = 14.0.23107.0
+# Visual Studio Version 17
+VisualStudioVersion = 17.1.32210.238
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PubSub", "PubSub\PubSub.csproj", "{C73D1486-C5C4-4BF0-AE0B-D0A214E2CCB9}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "PubSub", "PubSub\PubSub.csproj", "{C73D1486-C5C4-4BF0-AE0B-D0A214E2CCB9}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PubSub.Tests", "PubSub.Tests\PubSub.Tests.csproj", "{DC01D868-1B0E-4754-B070-F3CC4DAA7F7B}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "PubSub.Tests", "PubSub.Tests\PubSub.Tests.csproj", "{DC01D868-1B0E-4754-B070-F3CC4DAA7F7B}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -24,5 +24,8 @@ Global
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {8E0EFD7D-2056-4B98-A091-25029388564B}
 	EndGlobalSection
 EndGlobal
