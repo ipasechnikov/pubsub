@@ -1,9 +1,10 @@
-# **⚠️ Attention**
-
-This is a fork of [this repo](https://github.com/upta/pubsub).
-This fork was created for personal usage and targets .NET Framework 3.5.
-Maybe someone will find it useful (probably not) for old .NET Framework 3.5 projects.
 ---
+
+⚠️
+
+_**This fork was created for personal usage and targets .NET Framework 3.5**_
+
+*Maybe someone will find it useful for their old .NET Framework projects*
 
 ---
 
